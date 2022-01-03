@@ -19,8 +19,8 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-const upload = multer({ storage: storage });
-
+//const upload = multer({ storage: storage });
+var upload = multer({ storage: storage });
 class BooksController {
   public async getBooks(request: Request, res: Response) {
     const games = await pool.query("SELECT * FROM documentos_digitales");
@@ -59,7 +59,13 @@ class BooksController {
     }else{
       res.status(500).json("Los formatos aceptados son .png .jpg .jpeg");
     }
-  };
+  }
+
+  public async uploads(req: any, res: Response) {
+    const file = req.file;
+    console.log(file)
+    res.json('games');
+  }
 }
 
 const bookscontroller = new BooksController();

@@ -30,7 +30,8 @@ const storage = multer.diskStorage({
         cb(null, file.originalname);
     },
 });
-const upload = multer({ storage: storage });
+//const upload = multer({ storage: storage });
+var upload = multer({ storage: storage });
 class BooksController {
     getBooks(request, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -58,7 +59,6 @@ class BooksController {
     }
     upload() {
         exports.upload = upload.single("myFile");
-        console.log('hola')
     }
     ///SUBIR IMG
     resizeImages(req, res) {
@@ -74,7 +74,13 @@ class BooksController {
             }
         });
     }
-    ;
+    uploads(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const file = req.file;
+            console.log(file);
+            res.json('games');
+        });
+    }
 }
 const bookscontroller = new BooksController();
 exports.default = bookscontroller;
